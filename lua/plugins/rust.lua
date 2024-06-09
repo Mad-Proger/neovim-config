@@ -12,4 +12,8 @@ return {
         ft = "rust",
         opts = true,
     },
+    {
+        "mrcjkb/rustaceanvim",
+        ft = "rust",
+    },
 }
