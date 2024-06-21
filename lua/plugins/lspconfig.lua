@@ -7,7 +7,7 @@ return {
         "williamboman/mason-lspconfig.nvim",
         dependencies = { "williamboman/mason.nvim" },
         opts = {
-            ensure_installed = { "lua_ls", "clangd" },
+            ensure_installed = { "lua_ls", "clangd", "cmake" },
         },
     },
     {
@@ -16,6 +16,7 @@ return {
             local lspconfig = require("lspconfig")
             lspconfig.lua_ls.setup({})
             lspconfig.clangd.setup({})
+            lspconfig.cmake.setup({})
         end,
     },
 }

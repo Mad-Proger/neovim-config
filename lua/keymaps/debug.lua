@@ -21,5 +21,5 @@ return {
     {
         keys = "<F5>",
         command = dap.continue,
-    }
+    },
 }
