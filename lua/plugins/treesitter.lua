@@ -4,7 +4,15 @@ return {
         build = ":TSUpdate",
         main = "nvim-treesitter.configs",
         opts = {
-            ensure_installed = { "lua", "rust", "python", "cpp", "cmake", "vimdoc" },
+            ensure_installed = {
+                "lua",
+                "rust",
+                "python",
+                "cpp",
+                "cmake",
+                "vimdoc",
+                "markdown",
+            },
             highlight = { enable = true },
             indent = { enable = true },
         },
