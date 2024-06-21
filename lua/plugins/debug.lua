@@ -18,6 +18,7 @@ return {
         config = function()
             local dap = require("dap")
             local dapui = require("dapui")
+            dapui.setup()
 
             local open_ui = function()
                 dapui.open()
