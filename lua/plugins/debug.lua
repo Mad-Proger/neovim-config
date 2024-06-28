@@ -10,6 +10,16 @@ return {
                 command = "/usr/bin/lldb-vscode",
                 name = "lldb",
             }
+            dap.configurations.cpp = {
+                {
+                    name = "LLDB launch file",
+                    type = "lldb",
+                    request = "launch",
+                    program = "${command:pickFile}",
+                    cwd = "${fileDirname}",
+                    runInTerminal = true,
+                },
+            }
         end
     },
     {
