@@ -13,6 +13,7 @@ return {
             name = "cpp",
             type = "lldb",
             request = "launch",
+            runInTerminal = true,
         },
     },
 }
