@@ -6,8 +6,7 @@ return {
 
             dap.adapters.lldb = {
                 type = "executable",
-                -- change to lldb-dap when upgrading to llvm 18.0+
-                command = "/usr/bin/lldb-vscode",
+                command = "/usr/bin/lldb-dap",
                 name = "lldb",
             }
             dap.configurations.cpp = {
