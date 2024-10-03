@@ -9,17 +9,42 @@ return {
                 command = "/usr/bin/lldb-dap",
                 name = "lldb",
             }
+
+            local check_executable = function(filepath, type)
+                local stat_results = vim.system({ "stat", "--format", "%A", filepath }):wait()
+                return string.find(stat_results.stdout, "x") and type == "file"
+            end
+
+            local args = ""
+            vim.api.nvim_create_user_command("SetDebugLaunchArgs", function()
+                vim.ui.input({ prompt = "Enter debuggee launch arguments: " }, function(inp)
+                    args = inp
+                end)
+            end, {})
+
+            local cpp_config = {}
+            setmetatable(cpp_config, {
+                __call = function()
+                    local file_selector = require("custom.select-file").select_file
+                    local executable = file_selector(check_executable)
+
+                    local settings = {
+                        name = "LLDB launch file",
+                        type = "lldb",
+                        request = "launch",
+                        program = executable,
+                        cwd = "${workspaceFolder}",
+                        args = args,
+                    }
+
+                    return settings
+                end,
+            })
+
             dap.configurations.cpp = {
-                {
-                    name = "LLDB launch file",
-                    type = "lldb",
-                    request = "launch",
-                    program = "${command:pickFile}",
-                    cwd = "${fileDirname}",
-                    runInTerminal = true,
-                },
+                cpp_config,
             }
-        end
+        end,
     },
     {
         "rcarriga/nvim-dap-ui",

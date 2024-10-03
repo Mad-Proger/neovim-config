@@ -15,7 +15,12 @@ return {
         config = function()
             local lspconfig = require("lspconfig")
             lspconfig.lua_ls.setup({})
-            lspconfig.clangd.setup({})
+            lspconfig.clangd.setup({
+                cmd = {
+                    "clangd",
+                    "--clang-tidy",
+                },
+            })
             lspconfig.cmake.setup({})
         end,
     },

@@ -10,5 +10,5 @@ vim.g.mapleader = " "
 vim.api.nvim_create_autocmd("BufWrite", {
     callback = function()
         vim.lsp.buf.format()
-    end
+    end,
 })
