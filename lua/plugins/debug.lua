@@ -1,72 +1,70 @@
 return {
-	{
-		"mfussenegger/nvim-dap",
-		config = function()
-			local dap = require("dap")
+    {
+        "mfussenegger/nvim-dap",
+        config = function()
+            local dap = require("dap")
 
-			dap.adapters.lldb = {
-				type = "executable",
-				command = "/usr/bin/lldb-vscode-15",
-				name = "lldb",
-			}
+            dap.adapters.lldb = {
+                type = "executable",
+                command = "/usr/bin/lldb-vscode-15",
+                name = "lldb",
+            }
 
-			local check_executable = function(filepath, type)
-				local stat_results = vim.system({ "stat", "--format", "%A", filepath }):wait()
-				return string.find(stat_results.stdout, "x") and type == "file"
-			end
+            local check_executable = function(filepath, type)
+                local stat_results = vim.system({ "stat", "--format", "%A", filepath }):wait()
+                return string.find(stat_results.stdout, "x") and type == "file"
+            end
 
-			local args = ""
-			vim.api.nvim_create_user_command("SetDebugLaunchArgs", function()
-				vim.ui.input({ prompt = "Enter debuggee launch arguments: " }, function(inp)
-					args = inp
-				end)
-			end, {})
+            local args = ""
+            vim.api.nvim_create_user_command("SetDebugLaunchArgs", function()
+                vim.ui.input({ prompt = "Enter debuggee launch arguments: " }, function(inp)
+                    args = inp
+                end)
+            end, {})
 
-			local cpp_config = {}
-			setmetatable(cpp_config, {
-				__call = function()
-					local file_selector = require("custom.select-file").select_file
-					local executable = file_selector(check_executable)
+            local cpp_config = {}
+            setmetatable(cpp_config, {
+                __call = function()
+                    local file_selector = require("custom.select-file").select_file
+                    local executable = file_selector(check_executable)
 
-					local settings = {
-						name = "LLDB launch file",
-						type = "lldb",
-						request = "launch",
-						program = executable,
-						cwd = "${workspaceFolder}",
-						preRunCommands = { string.format("shell debug.sh %s %s", executable, args) },
-						launchCommands = { "gdb-remote localhost:1234" },
-						terminateCommands = { "kill" },
-					}
+                    local settings = {
+                        name = "LLDB launch file",
+                        type = "lldb",
+                        request = "launch",
+                        program = executable,
+                        cwd = "${workspaceFolder}",
+                        args = args,
+                    }
 
-					return settings
-				end,
-			})
+                    return settings
+                end,
+            })
 
-			dap.configurations.cpp = {
-				cpp_config,
-			}
-		end,
-	},
-	{
-		"rcarriga/nvim-dap-ui",
-		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
-		config = function()
-			local dap = require("dap")
-			local dapui = require("dapui")
-			dapui.setup()
+            dap.configurations.cpp = {
+                cpp_config,
+            }
+        end,
+    },
+    {
+        "rcarriga/nvim-dap-ui",
+        dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+        config = function()
+            local dap = require("dap")
+            local dapui = require("dapui")
+            dapui.setup()
 
-			local open_ui = function()
-				dapui.open()
-			end
-			local close_ui = function()
-				dapui.close()
-			end
+            local open_ui = function()
+                dapui.open()
+            end
+            local close_ui = function()
+                dapui.close()
+            end
 
-			dap.listeners.before["attach"]["dapui-config"] = open_ui
-			dap.listeners.before["launch"]["dapui-config"] = open_ui
-			dap.listeners.after["event_exited"]["dapui-config"] = close_ui
-			dap.listeners.after["event_terminated"]["dapui-config"] = close_ui
-		end,
-	},
+            dap.listeners.before["attach"]["dapui-config"] = open_ui
+            dap.listeners.before["launch"]["dapui-config"] = open_ui
+            dap.listeners.after["event_exited"]["dapui-config"] = close_ui
+            dap.listeners.after["event_terminated"]["dapui-config"] = close_ui
+        end,
+    },
 }
