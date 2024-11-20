@@ -14,5 +14,5 @@ vim.opt.rtp:prepend(lazypath)
 
 require("vim-config")
 require("lazy").setup("plugins")
-vim.cmd.colorscheme("nightfly")
+vim.cmd.colorscheme("moonfly")
 require("keymaps.setup")
