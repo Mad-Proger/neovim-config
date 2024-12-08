@@ -7,7 +7,13 @@ return {
         "williamboman/mason-lspconfig.nvim",
         dependencies = { "williamboman/mason.nvim" },
         opts = {
-            ensure_installed = { "lua_ls", "clangd", "cmake" },
+            ensure_installed = {
+                "lua_ls",
+                "clangd",
+                "cmake",
+                "pyright",
+                "ruff",
+            },
         },
     },
     {
@@ -19,9 +25,11 @@ return {
                 cmd = {
                     "clangd",
                     "--clang-tidy",
+                    "--enable-config",
                 },
             })
             lspconfig.cmake.setup({})
+            lspconfig.pyright.setup({})
         end,
     },
 }
