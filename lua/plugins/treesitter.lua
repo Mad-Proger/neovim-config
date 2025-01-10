@@ -6,12 +6,12 @@ return {
         opts = {
             ensure_installed = {
                 "lua",
-                "rust",
+                "asm",
+                "c", "cpp", "cmake", "cuda",
+                "rust", "toml",
                 "python",
-                "cpp",
-                "cmake",
-                "vimdoc",
-                "markdown",
+                "vim", "vimdoc", "markdown",
+                "hyprlang", "yaml", "yuck"
             },
             highlight = { enable = true },
             indent = { enable = true },
