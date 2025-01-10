@@ -9,9 +9,9 @@ return {
                 "asm",
                 "c", "cpp", "cmake", "cuda",
                 "rust", "toml",
-                "python",
+                "python", "typescript",
                 "vim", "vimdoc", "markdown",
-                "hyprlang", "yaml", "yuck"
+                "hyprlang", "yaml", "yuck", "nix",
             },
             highlight = { enable = true },
             indent = { enable = true },
