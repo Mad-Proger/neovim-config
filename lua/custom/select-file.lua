@@ -45,6 +45,9 @@ function M.select_file(file_filter)
     local current_path = vim.fn.getcwd()
     while true do
         local entry = select_dirent(current_path, file_filter)
+        if entry == nil then
+            return nil
+        end
         current_path = vim.fs.normalize(vim.fs.joinpath(current_path, entry.name))
         if entry.type ~= "directory" then
             break

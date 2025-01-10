@@ -27,6 +27,9 @@ return {
                 __call = function()
                     local file_selector = require("custom.select-file").select_file
                     local executable = file_selector(check_executable)
+                    if executable == nil then
+                        return { program = dap.ABORT }
+                    end
 
                     local settings = {
                         name = "LLDB launch file",
