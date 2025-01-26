@@ -38,6 +38,7 @@ return {
                         program = executable,
                         cwd = "${workspaceFolder}",
                         args = args,
+                        runInTerminal = true,
                     }
 
                     return settings
