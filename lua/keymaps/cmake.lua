@@ -9,5 +9,10 @@ return {
         keys = "<F17>",
         command = ":CMakeBuild<CR>",
         opts = { silent = true },
-    }
+    },
+    {
+        keys = "<F6>",
+        command = ":CMakeRun<CR>",
+        opts = { silent = true },
+    },
 }
