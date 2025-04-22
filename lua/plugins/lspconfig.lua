@@ -13,6 +13,7 @@ return {
                 "cmake",
                 "pyright",
                 "ruff",
+                "nil_ls",
             },
         },
     },
@@ -30,6 +31,9 @@ return {
             })
             lspconfig.cmake.setup({})
             lspconfig.pyright.setup({})
+            lspconfig.nil_ls.setup({})
+
+            vim.diagnostic.config({ virtual_text = true })
         end,
     },
 }

@@ -39,6 +39,7 @@ return {
                         cwd = "${workspaceFolder}",
                         args = args,
                         runInTerminal = true,
+                        stopOnEntry = false,
                     }
 
                     return settings
