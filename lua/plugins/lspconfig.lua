@@ -20,18 +20,19 @@ return {
     {
         "neovim/nvim-lspconfig",
         config = function()
-            local lspconfig = require("lspconfig")
-            lspconfig.lua_ls.setup({})
-            lspconfig.clangd.setup({
+            vim.lsp.config("clangd", {
                 cmd = {
                     "clangd",
                     "--clang-tidy",
                     "--enable-config",
-                },
+                }
             })
-            lspconfig.cmake.setup({})
-            lspconfig.pyright.setup({})
-            lspconfig.nil_ls.setup({})
+
+            vim.lsp.enable("clangd")
+            vim.lsp.enable("cmake")
+            vim.lsp.enable("lua_ls")
+            vim.lsp.enable("pyright")
+            vim.lsp.enable("nil_ls")
 
             vim.diagnostic.config({ virtual_text = true })
         end,
