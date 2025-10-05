@@ -10,6 +10,12 @@ return {
                 name = "lldb",
             }
 
+            dap.adapters.gdb = {
+                type = "executable",
+                command = "gdb",
+                args = { "--interpreter=dap", "--eval-command", "set print pretty on" },
+            }
+
             local check_executable = function(filepath, type)
                 local stat_results = vim.system({ "stat", "--format", "%A", filepath }):wait()
                 return string.find(stat_results.stdout, "x") and type == "file"

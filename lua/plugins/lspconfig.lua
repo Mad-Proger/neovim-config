@@ -25,7 +25,17 @@ return {
                     "clangd",
                     "--clang-tidy",
                     "--enable-config",
-                }
+                },
+            })
+
+            vim.lsp.config("lua_ls", {
+                format = {
+                    enable = true,
+                    defaultConfig = {
+                        indent_style = "space",
+                        indent_size = 2,
+                    },
+                },
             })
 
             vim.lsp.enable("clangd")
@@ -33,6 +43,10 @@ return {
             vim.lsp.enable("lua_ls")
             vim.lsp.enable("pyright")
             vim.lsp.enable("nil_ls")
+
+            -- requires 'vscode-langservers-extracted' to be installed globally in npm
+            vim.lsp.enable("html")
+            vim.lsp.enable("cssls")
 
             vim.diagnostic.config({ virtual_text = true })
         end,

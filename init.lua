@@ -14,5 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("vim-config")
 require("lazy").setup("plugins")
+vim.g.moonflyTransparent = true
 vim.cmd.colorscheme("moonfly")
 require("keymaps.setup")
