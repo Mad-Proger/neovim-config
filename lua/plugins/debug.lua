@@ -21,10 +21,13 @@ return {
                 return string.find(stat_results.stdout, "x") and type == "file"
             end
 
-            local args = ""
+            local args = {}
             vim.api.nvim_create_user_command("SetDebugLaunchArgs", function()
                 vim.ui.input({ prompt = "Enter debuggee launch arguments: " }, function(inp)
-                    args = inp
+                    args = {}
+                    for arg in inp:gmatch("%S+") do
+                        table.insert(args, arg)
+                    end
                 end)
             end, {})
 
